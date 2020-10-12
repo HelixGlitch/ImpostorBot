@@ -2,9 +2,9 @@
     ImpostorBot Patch Notes
 =================================
 
-v1.0 ImpostorBot: [October 12th, 2020]
-* The bot has officially become alive.
-* Added Sessions:
+v1.0.0 ImpostorBot: [October 11th, 2020]
+ * The bot has officially become alive.
+ * Added Sessions:
   - Use #begin to create a session in a voice channel
     // Sessions last until the moderator (owner, for programming purposes) leaves the channel one way or another.
     // When the moderator mutes/unmutes themselves, the bot server mutes/unmutes everyone in the voice channel respectively.
@@ -15,3 +15,9 @@ v1.0 ImpostorBot: [October 12th, 2020]
  
  * Miscellaneous additions:
   - Use #sus to eject someone (purely cosmetic).
+
+
+v1.0.1 ImpostorBot: [October 12th, 2020]
+ * Adjustments:
+  - Fixed the feedback embed given by the #stop command: It is no longer the same as with #transfer.
+  - Enabled the #stop feedback embed.
