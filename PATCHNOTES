@@ -21,3 +21,7 @@ v1.0.1 ImpostorBot: [October 12th, 2020]
  * Adjustments:
   - Fixed the feedback embed given by the #stop command: It is no longer the same as with #transfer.
   - Enabled the #stop feedback embed.
+
+v1.0.1a Hotfix: [October 12th, 2020]
+ * Bug fixes:
+  - Fixed fatal bug which prevented stopping sessions via #stop.
