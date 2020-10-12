@@ -1,0 +1,17 @@
+=================================
+    ImpostorBot Patch Notes
+=================================
+
+v1.0 ImpostorBot: [October 12th, 2020]
+* The bot has officially become alive.
+* Added Sessions:
+  - Use #begin to create a session in a voice channel
+    // Sessions last until the moderator (owner, for programming purposes) leaves the channel one way or another.
+    // When the moderator mutes/unmutes themselves, the bot server mutes/unmutes everyone in the voice channel respectively.
+  - Use #transfer to transfer moderatorship (ownership, for programming purposes) to another user in the SAME voice channel.
+  - Use #stop to stop all active sessions which you own.
+  - Use #session to see the details of the session in your voice channel (if there is one) - moderator, channel, session id.
+  - [ADMIN ONLY] Use #disable to pause the mute/unmute functionality of a session. Use the command again to enable it.
+ 
+ * Miscellaneous additions:
+  - Use #sus to eject someone (purely cosmetic).
