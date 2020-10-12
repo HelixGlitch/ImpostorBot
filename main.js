@@ -99,27 +99,33 @@ client.on("message", function(message) {
             break;
         case "stop":
             if(vc.channelID === undefined || vc.channelID === null) {
-                message.channel.send("You are not in a voice channel, so you cannot transfer a session!");
+                message.channel.send("You are not in a voice channel, so you do not own any sessions.");
                 return;
             }
-            /*
-            const stop_embed = new Discord.MessageEmbed()
-                        .setColor("#ff0000")
-                        .setTitle("Session Closed:")
-                        .addFields(
-                            { name: "Moderator:", value: `<@${message.author.id}>`, inline: true },
-                            { name: "New Moderator:", value: `<@${newOwner.id}>`, inline: true },
-                            { name: "\u200B", value: "\u200B", inline: true }
-                        )
-                        .addFields(
-                            { name: "Channel:", value: vc.channel.name, inline: true },
-                            { name: "Session:", value: transfered_session.id, inline: true},
-                            { name: "\u200B", value: "\u200B", inline: true }
-                        )
-                        .setFooter(`ImpostorBot ${config.version}`, "https://lh3.googleusercontent.com/VHB9bVB8cTcnqwnu0nJqKYbiutRclnbGxTpwnayKB4vMxZj8pk1220Rg-6oQ68DwAkqO=s180-rw");
-            */
-            message.channel.send(`Closed ${System.disconnectSessions(message.member)} sessions owned by user <@${message.member.id}>.`);
-            break;
+            const stopped_session = System.findSessionById(vc.channelID); 
+            if(stopped_session.owner === message.author.id) {
+                const stop_embed = new Discord.MessageEmbed()
+                .setColor("#ff0000")
+                .setTitle("Session Closed:")
+                .addFields(
+                    { name: "Moderator:", value: `<@${stopped_session.owner}>`, inline: true },
+                    { name: "Stopped by:", value: `<@${message.author.id}>`, inline: true },
+                    { name: "\u200B", value: "\u200B", inline: true }
+                )
+                .addFields(
+                    { name: "Channel:", value: vc.channel.name, inline: true },
+                    { name: "Session:", value: stopped_session.id, inline: true},
+                    { name: "\u200B", value: "\u200B", inline: true }
+                )
+                .setFooter(`ImpostorBot ${config.version}`, "https://lh3.googleusercontent.com/VHB9bVB8cTcnqwnu0nJqKYbiutRclnbGxTpwnayKB4vMxZj8pk1220Rg-6oQ68DwAkqO=s180-rw");
+                stopped_session.end();
+                message.channel.send(stop_embed);
+                return;
+            }else{
+                message.channel.send("You do not own the sssion.");
+                return;
+            }
+            return;
         case "sus":
             const ejected = message.mentions.members.first();
             if(!ejected) {
@@ -127,7 +133,7 @@ client.on("message", function(message) {
                 return;
             }
             message.channel.send(`<@${ejected.id}> has been ejected.`);
-            break;
+            return;
         case "session":
             if(vc.channelID === undefined || vc.channelID === null) {
                 message.channel.send("You are not in a voice channel.");
