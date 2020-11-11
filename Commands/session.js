@@ -27,4 +27,4 @@ function session(vc, message) {
 
     message.channel.send(information_embed);
 }
-exports.session = session;
+exports.run = session;

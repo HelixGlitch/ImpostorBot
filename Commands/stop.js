@@ -29,8 +29,8 @@ function stop(vc, message) {
         message.channel.send(stop_embed);
         return;
     }else{
-        message.channel.send("You do not own the sssion.");
+        message.channel.send("You do not own the session.");
         return;
     }
 }
-exports.stop = stop;
+exports.run = stop;

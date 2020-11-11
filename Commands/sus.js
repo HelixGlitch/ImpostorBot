@@ -12,4 +12,4 @@ function sus(vc, message) {
     }
     message.channel.send(`<@${ejected.id}> has been ejected.`);
 }
-exports.sus = sus;
+exports.run = sus;

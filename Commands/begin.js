@@ -29,4 +29,4 @@ function begin(vc, message) {
     message.channel.send(embed);
 }
 
-exports.begin = begin;
+exports.run = begin;

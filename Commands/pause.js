@@ -31,4 +31,4 @@ function pause(vc, message) {
         return;
     }
 }
-exports.pause = pause;
+exports.run = pause;

@@ -48,4 +48,4 @@ function transfer(vc, message) {
         message.channel.send("This user is not in your channel!")
     }
 }
-exports.transfer = transfer;
+exports.run = transfer;
