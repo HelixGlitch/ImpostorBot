@@ -31,3 +31,12 @@ v1.0.2 ImpostorBot: [October 23rd, 2020]
   - Restructured file system: commands are now stored in separate files.
   - Restructured main.js to accomodate separate command files.
   - Added a safety net in case of a rare exception while muting channel members.
+
+v1.0.3 ImpostorBot: [November 11th, 2020]
+ * Adjustments:
+  - Added generalized command execution instead of a specific call to each separate command file.
+  - Slightly changed command file function exports to ensure standartization.
+ 
+ * Bug fixes:
+  - Now tracking and catching a bug caused by a user scheduled for a server-mute leaving before the voice channel before processs completion.
+  
