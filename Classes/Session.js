@@ -39,9 +39,11 @@ class Session {
             .then
             (
                 voiceChannel => {
-                    voiceChannel.members.forEach(function(guildMember) {
+                    voiceChannel.members.forEach(async function(guildMember) {
                         //console.log(owner, guildMember.id, typeof(guildMember.id), typeof(owner), guildMember.id != owner);
-                        if((mute ? guildMember.voice.serverMute === false : guildMember.voice.serverMute === true) && guildMember.id != owner /*this has to be == instead of === for some reason*/) guildMember.voice.setMute(mute ? true : false);
+                            if((mute ? guildMember.voice.serverMute === false : guildMember.voice.serverMute === true) && guildMember.id != owner /*this has to be == instead of === for some reason*/) {
+                                guildMember.voice.setMute(mute ? true : false)
+                            }
                     });
                 }
             )
