@@ -24,29 +24,15 @@ client.on("message", function(message) {
     const p_m = message.content.split(" ");                                             // Split message into words.
     if(message.content[0] !== "#") return;                                              // Check if trigger symbol used. 
     const cmd = p_m[0].substring(1).toLowerCase();                                      // Get command of message.
-    const args = p_m.splice(0, 1);                                                      // Get array of words WITHOUT first word (command).
+    const args = p_m.splice(0, 1);                                                      // Get array of words EXCLUDING first word (command).
     
     const vc = message.member.voice;
-    switch (cmd) {
-        case "begin_session":
-        case "begin":
-            require("./Commands/begin.js").begin(vc, message);
-            break;
-        case "transfer":
-            require("./Commands/transfer.js").transfer(vc, message);
-            break;
-        case "stop":
-            require("./Commands/stop.js").stop(vc, message);
-            break;
-        case "sus":
-            require("./Commands/sus.js").sus(vc, message);
-            return;
-        case "session":
-            require("./Commands/session.js").session(vc, message);
-            break;
-        case "pause":
-            require("./Commands/pause.js").pause(vc, message);
-            break;
+
+    try {
+        require(`./Commands/${cmd}.js`).run(vc, message);
+    }
+    catch(err) {
+        if(err.code === "MODULE_NOT_FOUND") message.channel.send(`"${cmd}" is not a valid command!`);
     }
     
 });
@@ -55,6 +41,9 @@ client.on("voiceStateUpdate", function(oldUser, newUser) {
     switch (System.voiceChange(oldUser, newUser)) {
         case "disconnect":
         case "switched":
+            if(System.ownsCurrentSession(oldUser)) {
+                System.findSessionById(oldUser.channelID).muteMembers(0);
+            }
             System.disconnectSessions(oldUser, System.sessions);                        // Disconnect all sessions of user.
             break;
         case "self_mute":
