@@ -25,3 +25,9 @@ v1.0.1 ImpostorBot: [October 12th, 2020]
 v1.0.1a Hotfix: [October 12th, 2020]
  * Bug fixes:
   - Fixed fatal bug which prevented stopping sessions via #stop.
+  
+v1.0.2 ImpostorBot: [October 23rd, 2020]
+ * Adjustments:
+  - Restructured file system: commands are now stored in separate files.
+  - Restructured main.js to accomodate separate command files.
+  - Added a safety net in case of a rare exception while muting channel members.
