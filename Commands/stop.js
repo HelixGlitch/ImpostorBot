@@ -10,21 +10,21 @@ function stop(vc, message) {
         return;
     }
     const stopped_session = System.findSessionById(vc.channelID); 
-    if(stopped_session.owner === message.author.id) {
+    if(stopped_session.owner === message.author.id || System.isAdmin(message.author.id)) {
         const stop_embed = new Discord.MessageEmbed()
-        .setColor("#ff0000")
-        .setTitle("Session Closed:")
-        .addFields(
-            { name: "Moderator:", value: `<@${stopped_session.owner}>`, inline: true },
-            { name: "Stopped by:", value: `<@${message.author.id}>`, inline: true },
-            { name: "\u200B", value: "\u200B", inline: true }
-        )
-        .addFields(
-            { name: "Channel:", value: vc.channel.name, inline: true },
-            { name: "Session:", value: stopped_session.id, inline: true},
-            { name: "\u200B", value: "\u200B", inline: true }
-        )
-        .setFooter(`ImpostorBot ${config.version}`, "https://lh3.googleusercontent.com/VHB9bVB8cTcnqwnu0nJqKYbiutRclnbGxTpwnayKB4vMxZj8pk1220Rg-6oQ68DwAkqO=s180-rw");
+            .setColor("#ff0000")
+            .setTitle(`Session ${stopped_session.owner === message.author.id ? "" : "Forcibly "}Closed:`)
+            .addFields(
+                { name: "Moderator:", value: `<@${stopped_session.owner}>`, inline: true },
+                { name: "Stopped by:", value: `<@${message.author.id}>`, inline: true },
+                { name: "\u200B", value: "\u200B", inline: true }
+            )
+            .addFields(
+                { name: "Channel:", value: vc.channel.name, inline: true },
+                { name: "Session:", value: stopped_session.id, inline: true},
+                { name: "\u200B", value: "\u200B", inline: true }
+            )
+            .setFooter(`ImpostorBot ${config.version}`, "https://lh3.googleusercontent.com/VHB9bVB8cTcnqwnu0nJqKYbiutRclnbGxTpwnayKB4vMxZj8pk1220Rg-6oQ68DwAkqO=s180-rw");
         stopped_session.end();
         message.channel.send(stop_embed);
         return;
