@@ -50,6 +50,11 @@ class System {
         if(current_sesh.owner === user.id) return true;
         return false;
     }
+    isAdmin(id) {
+        const admins = require("../config.json").admins;
+        if(admins.includes(id)) return true;
+        return false;
+    }
     voiceChange(oldUser, newUser) {
         if(oldUser && !newUser) return "disconnect";
         if(!oldUser && newUser) return "connect";
@@ -57,6 +62,8 @@ class System {
             if(oldUser.channelID !== newUser.channelID) return "switched";
             if(oldUser.selfMute === false && newUser.selfMute === true) return "self_mute";
             if(oldUser.selfMute === true && newUser.selfMute === false) return "self_unmute";
+            if(oldUser.serverMute === false && newUser.serverMute === true) return "server_mute";
+            if(oldUser.serverMute === true && newUser.serverMute === false) return "server_unmute";
             return "unknown";
         }
     }
